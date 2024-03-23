@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: Zavod_IT
+  jackson:
+    time-zone: UTC
+  liquibase:
+    enabled: false
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+springdoc:
+  swagger-ui:
+    path: "/swagger-ui"
+
+server:
+  port: 8080
