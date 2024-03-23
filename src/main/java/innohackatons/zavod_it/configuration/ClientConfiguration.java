@@ -17,8 +17,7 @@ public class ClientConfiguration {
     @Bean
     public WebClient tenderproClient() {
         return WebClient.builder()
-            .baseUrl(configuration.client().tenderProUrl())
-            .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+            .baseUrl(configuration.client().tenderProUrl()).defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
             .defaultHeader(HttpHeaders.CONNECTION, "keep-alive")
             .build();
     }
