@@ -10,6 +10,6 @@ public record ApplicationConfiguration(
     @NotNull
     Client client
 ) {
-    public record Client(@NotNull String tenderProUrl) {
+    public record Client(@NotNull String tenderProUrl, @NotNull String tenderTatneft) {
     }
 }

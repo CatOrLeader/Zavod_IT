@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 @RequiredArgsConstructor
 public class TenderController {
-    private final TenderService tenderService;
+    private final TenderService tatneftService;
 
     @GetMapping(value = {"/tenders", "/"})
     public String listTenders(Model model) {
-        List<TenderDto> tenders = tenderService.findAllTenders().get();
+        List<TenderDto> tenders = tatneftService.findAllTenders().get();
         model.addAttribute("tenders", tenders);
         return "tenders-list";
     }

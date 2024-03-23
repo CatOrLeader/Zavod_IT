@@ -1,6 +1,7 @@
 app:
   client:
     tender-pro-url: "https://www.tender.pro/api"
+    tender-tatneft: "https://tender.tatneft.ru/"
 
 spring:
   application:
