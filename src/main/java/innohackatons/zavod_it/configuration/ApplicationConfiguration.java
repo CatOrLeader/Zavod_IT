@@ -10,7 +10,6 @@ public record ApplicationConfiguration(
     @NotNull
     Client client
 ) {
-    @Validated
     public record Client(@NotNull String tenderProUrl) {
     }
 }

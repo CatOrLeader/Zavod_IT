@@ -11,5 +11,5 @@ public record TatneftTenderDto(
     @NotBlank String title,
     @NotBlank String type,
     @NotBlank String companyName
-    ) {
+) {
 }
