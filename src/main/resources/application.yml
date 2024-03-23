@@ -1,3 +1,7 @@
+app:
+  client:
+    tender-pro-url: "https://www.tender.pro/api
+
 spring:
   application:
     name: Zavod_IT
