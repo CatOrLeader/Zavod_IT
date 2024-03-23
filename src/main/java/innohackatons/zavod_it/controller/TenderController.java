@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,10 +20,25 @@ public class TenderController {
         this.tenderService = tenderService;
     }
 
-    @GetMapping("/tenders")
+    @GetMapping(value = {"/tenders", "/"})
     public String listTenders(Model model) {
-        List<TenderDto> tenders = new ArrayList<>();
+        List<TenderDto> tenders = tenderService.findAllTenders();
         model.addAttribute("tenders", tenders);
         return "tenders-list";
+    }
+
+    @GetMapping("/tenders/search")
+    public String searchCar(@RequestParam(value = "query") String query, Model model) {
+        List<TenderDto> tenderDtos = tenderService.searchTenders(query);
+        model.addAttribute("tenders", tenderDtos);
+
+        return "tenders-list";
+    }
+
+    @GetMapping("/tenders/{tenderId}")
+    public String tenderDetails(@PathVariable("tenderId") String tenderId, Model model) {
+        TenderDto tenderDto = tenderService.findTenderById(tenderId);
+        model.addAttribute("tender", tenderDto);
+        return "tenders-details";
     }
 }
