@@ -19,7 +19,7 @@ public class TenderController {
     }
 
     @GetMapping("/tenders")
-    public String listCars(Model model) {
+    public String listTenders(Model model) {
         List<TenderDto> tenders = new ArrayList<>();
         model.addAttribute("tenders", tenders);
         return "tenders-list";
