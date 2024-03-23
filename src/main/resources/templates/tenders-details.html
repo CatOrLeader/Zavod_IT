@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информация о тендере</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body class="d-flex flex-column">
+<section layout:fragment="body">
+    <header class="py-5 bg-light border-bottom mb-4">
+        <div class="container">
+            <div class="text-center my-5">
+                <h1 class="fw-bolder" th:text="${tender?.title}"></h1>
+                <p class="lead mb-0">Информация о тендере</p>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="small text-muted" th:text="${tender.openDate}"></div>
+                        <h2 class="card-title">Информация о тендере</h2>
+                        <p class="card-text" th:text="${tender.title}"></p>
+                        <div class="info">
+                            <span>Идентификатор:</span>
+                            <span th:text="${tender.id}"></span>
+                        </div>
+                        <div class="info">
+                            <span>Тип:</span>
+                            <span th:text="${tender.type}"></span>
+                        </div>
+                        <div class="info">
+                            <span>Дата начала:</span>
+                            <span th:text="${tender.openDate}"></span>
+                        </div>
+                        <div class="info">
+                            <span>Дата окончания:</span>
+                            <span th:text="${tender.closeDate}"></span>
+                        </div>
+                        <div class="info">
+                            <span>Адрес доставки:</span>
+                            <span th:text="${tender.deliveryAddress ?: 'Нет информации'}"></span>
+                        </div>
+                        <div class="info">
+                            <span>Название валюты:</span>
+                            <span th:text="${tender.currencyName ?: 'Нет информации'}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

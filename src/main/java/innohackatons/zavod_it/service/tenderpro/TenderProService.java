@@ -19,7 +19,7 @@ public class TenderProService implements TenderService {
     private final WebClient tenderproClient;
 
     @Override
-    public Optional<List<TenderDto>> getAllTenders() {
+    public Optional<List<TenderDto>> findAllTenders() {
         return tenderproClient
             .get()
             .uri(uriBuilder -> uriBuilder
@@ -55,5 +55,15 @@ public class TenderProService implements TenderService {
                     .map(TenderDto::new).collect(Collectors.toList()));
             })
             .blockOptional();
+    }
+
+    @Override
+    public Optional<List<TenderDto>> searchTenders(String query) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<TenderDto> findTenderById(String id) {
+        return Optional.empty();
     }
 }
