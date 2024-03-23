@@ -1,9 +1,11 @@
 package innohackatons.zavod_it.service.tenderpro;
 
+import innohackatons.zavod_it.dto.TenderDto;
 import innohackatons.zavod_it.dto.tenderpro.Response;
-import innohackatons.zavod_it.dto.tenderpro.TenderproTenderDto;
+import innohackatons.zavod_it.service.TenderService;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -13,10 +15,11 @@ import reactor.core.publisher.Mono;
 @Service
 @Log4j2
 @RequiredArgsConstructor
-public class TenderProService {
+public class TenderProService implements TenderService {
     private final WebClient tenderproClient;
 
-    public Optional<List<TenderproTenderDto>> getAllTenders() {
+    @Override
+    public Optional<List<TenderDto>> getAllTenders() {
         return tenderproClient
             .get()
             .uri(uriBuilder -> uriBuilder
@@ -33,6 +36,7 @@ public class TenderProService {
             .flatMap(entity -> {
                 if (!entity.getStatusCode().is2xxSuccessful()) {
                     log.warn("The request is unsatisfied on tenderpro: " + entity.getBody());
+                    return Mono.empty();
                 }
 
                 var body = entity.getBody();
@@ -47,7 +51,8 @@ public class TenderProService {
                     return Mono.empty();
                 }
 
-                return Mono.justOrEmpty(entity.getBody().result().data());
+                return Mono.justOrEmpty(entity.getBody().result().data().stream()
+                    .map(TenderDto::new).collect(Collectors.toList()));
             })
             .blockOptional();
     }
