@@ -1,10 +1,10 @@
-package innohackatons.zavod_it.dto.tatneft;
+package innohackatons.zavod_it.dto.icetrade;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 
-public record TatneftTenderDto(
+public record IceTradeTenderDto(
     @NotBlank String code,
     @NotNull LocalDate openDate,
     @NotNull LocalDate closeDate,
