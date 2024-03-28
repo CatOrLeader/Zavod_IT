@@ -1,4 +1,4 @@
-package innohackatons.zavod_it.db.repository;
+package innohackatons.zavod_it.db;
 
 import innohackatons.zavod_it.dto.TenderDto;
 import jakarta.validation.constraints.NotBlank;

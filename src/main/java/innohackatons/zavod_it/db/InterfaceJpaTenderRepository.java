@@ -1,4 +1,4 @@
-package innohackatons.zavod_it.db.repository.jpa;
+package innohackatons.zavod_it.db;
 
 import innohackatons.zavod_it.dto.TenderDto;
 import org.springframework.data.jpa.repository.JpaRepository;
