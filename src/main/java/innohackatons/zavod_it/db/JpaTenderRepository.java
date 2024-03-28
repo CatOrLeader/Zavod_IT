@@ -51,4 +51,9 @@ public class JpaTenderRepository implements TenderRepository {
         jpaTenderRepository.saveAndFlush(oldTender);
         return true;
     }
+
+    @Transactional
+    public List<TenderDto> findByQuery(@NotBlank String query) {
+        return jpaTenderRepository.findByQuery(query);
+    }
 }

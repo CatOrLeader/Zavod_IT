@@ -16,4 +16,6 @@ public interface TenderRepository {
     List<TenderDto> findAll();
 
     boolean update(@NotNull TenderDto newTender);
+
+    List<TenderDto> findByQuery(@NotBlank String query);
 }

@@ -24,8 +24,8 @@ import org.jetbrains.annotations.NotNull;
 @Table(name = "tender")
 public class TenderDto {
     @Id
-    @Column(nullable = false, updatable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, updatable = false,
+            name = "tender_id")
     @NotBlank private String id;
 
     @Column(nullable = false)
