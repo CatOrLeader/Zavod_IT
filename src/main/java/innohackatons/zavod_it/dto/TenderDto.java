@@ -1,5 +1,6 @@
 package innohackatons.zavod_it.dto;
 
+import innohackatons.zavod_it.dto.api.TenderRequest;
 import innohackatons.zavod_it.dto.tenderpro.TenderproTenderDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,8 +24,8 @@ import org.jetbrains.annotations.NotNull;
 @Table(name = "tender")
 public class TenderDto {
     @Id
-    @Column(nullable = false, updatable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, updatable = false,
+            name = "tender_id")
     @NotBlank private String id;
 
     @Column(nullable = false)
@@ -42,7 +43,7 @@ public class TenderDto {
     private String deliveryAddress;
     private String currencyName;
 
-    public TenderDto(@NotBlank TenderproTenderDto dto) {
+    public TenderDto(@NotNull TenderproTenderDto dto) {
         this(
             dto.id(),
             dto.title(),
@@ -51,6 +52,18 @@ public class TenderDto {
             dto.closeDate(),
             dto.deliveryAddress(),
             dto.currencyName()
+        );
+    }
+
+    public TenderDto(@NotNull TenderRequest request) {
+        this(
+            request.id(),
+            request.title(),
+            request.type(),
+            request.openDate(),
+            request.closeDate(),
+            request.deliveryAddress(),
+            request.currencyName()
         );
     }
 }

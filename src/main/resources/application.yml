@@ -20,10 +20,6 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
       ddl-auto: validate
     show-sql: true
-  liquibase:
-    enabled: false
-  autoconfigure:
-    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 
 springdoc:
   swagger-ui:

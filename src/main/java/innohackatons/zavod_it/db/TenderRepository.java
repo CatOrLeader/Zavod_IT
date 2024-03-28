@@ -1,4 +1,4 @@
-package innohackatons.zavod_it.db.repository;
+package innohackatons.zavod_it.db;
 
 import innohackatons.zavod_it.dto.TenderDto;
 import jakarta.validation.constraints.NotBlank;
@@ -16,4 +16,6 @@ public interface TenderRepository {
     List<TenderDto> findAll();
 
     boolean update(@NotNull TenderDto newTender);
+
+    List<TenderDto> findByQuery(@NotBlank String query);
 }

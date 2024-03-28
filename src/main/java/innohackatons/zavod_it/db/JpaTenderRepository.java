@@ -1,6 +1,5 @@
-package innohackatons.zavod_it.db.repository.jpa;
+package innohackatons.zavod_it.db;
 
-import innohackatons.zavod_it.db.repository.TenderRepository;
 import innohackatons.zavod_it.dto.TenderDto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -51,5 +50,10 @@ public class JpaTenderRepository implements TenderRepository {
         oldTender = newTender;
         jpaTenderRepository.saveAndFlush(oldTender);
         return true;
+    }
+
+    @Transactional
+    public List<TenderDto> findByQuery(@NotBlank String query) {
+        return jpaTenderRepository.findByQuery(query);
     }
 }
