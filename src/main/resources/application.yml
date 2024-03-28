@@ -9,6 +9,17 @@ spring:
     name: Zavod_IT
   jackson:
     time-zone: UTC
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/${POSTGRES_DB}"
+    username: "${POSTGRES_USER}"
+    password: "${POSTGRES_PASSWORD}"
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+      ddl-auto: validate
+    show-sql: true
   liquibase:
     enabled: false
   autoconfigure:
