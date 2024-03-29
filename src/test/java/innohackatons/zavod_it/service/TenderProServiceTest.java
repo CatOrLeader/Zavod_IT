@@ -1,6 +1,5 @@
 package innohackatons.zavod_it.service;
 
-import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.github.tomakehurst.wiremock.junit5.WireMockExtension;
 import com.google.gson.Gson;
@@ -33,18 +32,17 @@ import static org.assertj.core.api.Assertions.assertThat;
     @MockBean(classes = TenderRepository.class)
 })
 public class TenderProServiceTest {
+
     @RegisterExtension
     public static final WireMockExtension WIRE_MOCK_SERVER = WireMockExtension.newInstance()
         .options(WireMockConfiguration.wireMockConfig().dynamicPort())
         .build();
-
     @Autowired
     private TenderProService tenderProService;
 
     @DynamicPropertySource
     private static void configureProperties(DynamicPropertyRegistry registry) {
         registry.add("app.client.tender-pro-url", WIRE_MOCK_SERVER::baseUrl);
-
         registry.add("spring.autoconfigure.exclude", () ->
             "org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration," +
             " org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration," +
@@ -53,6 +51,7 @@ public class TenderProServiceTest {
 
     @Test
     public void testFindAllTenders() {
+
         WIRE_MOCK_SERVER.stubFor(get(urlPathEqualTo("/_info.tenderlist_by_set.json"))
             .withQueryParam("_key", equalTo("7b56c77b9f70220c3d5d4ce6477674ea"))
             .withQueryParam("set_type_id", equalTo("7"))
@@ -74,7 +73,7 @@ public class TenderProServiceTest {
         String actualJson = gson.toJson(tenders);
 
         String expectedJson =
-            "[{\"id\":\"1\",\"title\":\"Tender 1\",\"type\":\"Type 1\",\"openDate\":\"2022-01-01\",\"closeDate\":\"2022-02-01\",\"deliveryAddress\":\"Address 1\",\"currencyName\":\"USD\"},{\"id\":\"2\",\"title\":\"Tender 2\",\"type\":\"Type 2\",\"openDate\":\"2022-03-01\",\"closeDate\":\"2022-04-01\",\"deliveryAddress\":\"Address 2\",\"currencyName\":\"EUR\"}]";
+            "[{\"id\":\"1\",\"title\":\"Tender 1\",\"type\":\"Type 1\",\"openDate\":\"2022-01-01\",\"closeDate\":\"2022-02-01\",\"deliveryAddress\":\"Address 1\",\"currencyName\":\"USD\",\"url\":\"https://www.tender.pro/api/tender/1/view_public\"},{\"id\":\"2\",\"title\":\"Tender 2\",\"type\":\"Type 2\",\"openDate\":\"2022-03-01\",\"closeDate\":\"2022-04-01\",\"deliveryAddress\":\"Address 2\",\"currencyName\":\"EUR\",\"url\":\"https://www.tender.pro/api/tender/2/view_public\"}]";
 
         assertThat(actualJson).isEqualTo(expectedJson);
     }
