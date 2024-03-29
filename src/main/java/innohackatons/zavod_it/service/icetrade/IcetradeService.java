@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.jsoup.Jsoup;
@@ -25,7 +24,6 @@ public class IcetradeService implements TenderService {
 
     @Override
     public Mono<List<TenderDto>> findAllTenders() {
-//        https://icetrade.by/search/foreign_uno?search_text=&auc_num=&company_title=&countries%5B%5D=RUS&industries=&period=&created_from=&created_to=&request_end_from=&request_end_to=&sort=num%3Adesc&sbm=1&onPage=20
         return iceTradeClient
             .get()
             .uri(uriBuilder -> uriBuilder
@@ -51,7 +49,6 @@ public class IcetradeService implements TenderService {
     }
 
     private List<TenderDto> parseTendersFromHtml(String htmlContent) {
-        System.out.println(htmlContent);
         List<TenderDto> tenderList = new ArrayList<>();
         Document doc = Jsoup.parse(htmlContent);
         Elements rows = doc.select("table.auctions tr[class^=rw]");
@@ -73,15 +70,5 @@ public class IcetradeService implements TenderService {
         }
 
         return tenderList;
-    }
-
-    @Override
-    public Optional<List<TenderDto>> searchTenders(String query) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<TenderDto> findTenderById(String id) {
-        return Optional.empty();
     }
 }

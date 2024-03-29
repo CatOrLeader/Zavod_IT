@@ -10,4 +10,6 @@ public interface InterfaceJpaTenderRepository extends JpaRepository<TenderDto, S
     @Query(value = "SELECT * FROM tender as t WHERE LOWER(t.title) LIKE " +
                    "LOWER(CONCAT('%', ?1, '%'))", nativeQuery = true)
     List<TenderDto> findByQuery(@NotBlank String query);
+
+    int removeById(@NotBlank String id);
 }

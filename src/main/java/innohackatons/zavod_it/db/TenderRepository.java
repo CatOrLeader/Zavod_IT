@@ -18,4 +18,6 @@ public interface TenderRepository {
     boolean update(@NotNull TenderDto newTender);
 
     List<TenderDto> findByQuery(@NotBlank String query);
+
+    boolean removeById(@NotBlank String id);
 }

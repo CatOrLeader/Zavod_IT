@@ -4,7 +4,6 @@ import innohackatons.zavod_it.dto.TenderDto;
 import innohackatons.zavod_it.dto.tenderpro.Response;
 import innohackatons.zavod_it.service.TenderService;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -55,13 +54,4 @@ public class TenderProService implements TenderService {
             });
     }
 
-    @Override
-    public Optional<List<TenderDto>> searchTenders(String query) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<TenderDto> findTenderById(String id) {
-        return Optional.empty();
-    }
 }

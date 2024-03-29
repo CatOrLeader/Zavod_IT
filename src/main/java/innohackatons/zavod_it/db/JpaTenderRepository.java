@@ -16,7 +16,7 @@ public class JpaTenderRepository implements TenderRepository {
 
     @Transactional
     public Optional<TenderDto> add(@NotNull TenderDto tenderDto) {
-        if (jpaTenderRepository.findById(tenderDto.getId()).isEmpty()) {
+        if (findById(tenderDto.getId()).isEmpty()) {
             return Optional.of(jpaTenderRepository.saveAndFlush(tenderDto));
         }
 
@@ -55,5 +55,10 @@ public class JpaTenderRepository implements TenderRepository {
     @Transactional
     public List<TenderDto> findByQuery(@NotBlank String query) {
         return jpaTenderRepository.findByQuery(query);
+    }
+
+    @Override
+    public boolean removeById(String id) {
+        return jpaTenderRepository.removeById(id) > 0;
     }
 }

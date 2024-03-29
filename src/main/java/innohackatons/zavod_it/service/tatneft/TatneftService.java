@@ -21,14 +21,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 @Service
 @Log4j2
 @RequiredArgsConstructor
 public class TatneftService implements TenderService {
-    private final WebClient tatneftClient; // del
     @Value("${app.client.tender-tatneft}")
     private String tatneftUrl;
 
@@ -45,10 +43,7 @@ public class TatneftService implements TenderService {
             "//div[@class='header_tools__info_link__item for-purchase_panel_view']/span[@class='pseudo']"));
         tendersElement.click();
 
-//        WebDriverWait wait = new WebDriverWait(driver, 10);
-//        WebElement table = wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("tbody")));
         try {
-
             Thread.sleep(2000);
             String htmlContent = driver.getPageSource();
 
@@ -78,16 +73,6 @@ public class TatneftService implements TenderService {
             System.out.println(e.getMessage());
             return Mono.empty();
         }
-    }
-
-    @Override
-    public Optional<List<TenderDto>> searchTenders(String query) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<TenderDto> findTenderById(String id) {
-        return Optional.empty();
     }
 
 }

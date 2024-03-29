@@ -40,7 +40,7 @@ public class TenderProServiceTest {
     private TenderProService tenderProService;
 
     @Test
-    public void testFindAllTenders() throws JsonProcessingException {
+    public void testFindAllTenders() {
 
         WIRE_MOCK_SERVER.stubFor(get(urlPathEqualTo("/_info.tenderlist_by_set.json"))
             .withQueryParam("_key", equalTo("7b56c77b9f70220c3d5d4ce6477674ea"))

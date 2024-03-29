@@ -11,8 +11,4 @@ import reactor.core.publisher.Mono;
 @Service
 public interface TenderService {
     @NotNull Mono<List<TenderDto>> findAllTenders();
-
-    @NotNull Optional<List<TenderDto>> searchTenders(@NotBlank String query);
-
-    @NotNull Optional<TenderDto> findTenderById(@NotBlank String id);
 }

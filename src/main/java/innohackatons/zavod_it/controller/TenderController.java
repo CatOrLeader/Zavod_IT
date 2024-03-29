@@ -26,7 +26,7 @@ public class TenderController {
     }
 
     @GetMapping("/tenders/search")
-    public String searchCar(@RequestParam(value = "query") String query, Model model) {
+    public String searchTender(@RequestParam(value = "query") String query, Model model) {
         List<TenderDto> tenderDto = repository.findByQuery(query);
         model.addAttribute("tenders", tenderDto);
 

@@ -22,10 +22,6 @@ class TatneftClientSimpleTest {
 
     @Test
     void contextLoads() throws InterruptedException {
-//        System.setProperty(
-//            "webdriver.chrome.driver",
-//            "C:\\Users\\Vladi\\Downloads\\chromedriver-win64\\chromedriver.exe"
-//        );
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
@@ -38,11 +34,8 @@ class TatneftClientSimpleTest {
         tendersElement.click();
 
         Thread.sleep(2000);
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//        WebElement table = wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("tbody")));
 
         String htmlContent = driver.getPageSource();
-//        System.out.println(htmlContent);
 
         Document doc = Jsoup.parse(htmlContent);
 
@@ -56,8 +49,6 @@ class TatneftClientSimpleTest {
             }
             System.out.println();
         }
-
-//        driver.quit();
     }
 
 

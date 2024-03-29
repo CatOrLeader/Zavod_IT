@@ -60,15 +60,4 @@ public class IntegrationTest {
         registry.add("spring.datasource.username", POSTGRES::getUsername);
         registry.add("spring.datasource.password", POSTGRES::getPassword);
     }
-
-//    @Bean
-//    @ServiceConnection
-//    PostgreSQLContainer<?> postgresContainer() {
-//        return new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
-//    }
-//
-//    public static void main(String[] args) {
-//        SpringApplication.from(ZavodItApplication::main).with(IntegrationTest.class).run(args);
-//    }
-
 }
