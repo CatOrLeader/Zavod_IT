@@ -1,5 +1,6 @@
 package innohackatons.zavod_it.service;
 
+import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.github.tomakehurst.wiremock.junit5.WireMockExtension;
 import com.google.gson.Gson;
@@ -32,7 +33,6 @@ import static org.assertj.core.api.Assertions.assertThat;
     @MockBean(classes = TenderRepository.class)
 })
 public class TenderProServiceTest {
-
     @RegisterExtension
     public static final WireMockExtension WIRE_MOCK_SERVER = WireMockExtension.newInstance()
         .options(WireMockConfiguration.wireMockConfig().dynamicPort())
@@ -43,6 +43,8 @@ public class TenderProServiceTest {
 
     @DynamicPropertySource
     private static void configureProperties(DynamicPropertyRegistry registry) {
+        registry.add("app.client.tender-pro-url", WIRE_MOCK_SERVER::baseUrl);
+
         registry.add("spring.autoconfigure.exclude", () ->
             "org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration," +
             " org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration," +
@@ -51,7 +53,6 @@ public class TenderProServiceTest {
 
     @Test
     public void testFindAllTenders() {
-
         WIRE_MOCK_SERVER.stubFor(get(urlPathEqualTo("/_info.tenderlist_by_set.json"))
             .withQueryParam("_key", equalTo("7b56c77b9f70220c3d5d4ce6477674ea"))
             .withQueryParam("set_type_id", equalTo("7"))
