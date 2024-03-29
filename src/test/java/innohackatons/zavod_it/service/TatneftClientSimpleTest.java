@@ -13,10 +13,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-// БЕЗ VPN
+
 @SpringBootTest
 class TatneftClientSimpleTest {
-//
     @Value("${app.client.tender-tatneft}")
     private String tatneftUrl;
 
@@ -39,7 +38,6 @@ class TatneftClientSimpleTest {
 
         Document doc = Jsoup.parse(htmlContent);
 
-
         Elements rows = doc.selectFirst("tbody").select("tr");
 
         for (Element row : rows) {
@@ -50,6 +48,4 @@ class TatneftClientSimpleTest {
             System.out.println();
         }
     }
-
-
 }

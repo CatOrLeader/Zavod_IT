@@ -41,6 +41,7 @@ public class TenderDto {
 
     private String deliveryAddress;
     private String currencyName;
+    private String url;
 
     public TenderDto(@NotNull TenderproTenderDto dto) {
         this(
@@ -50,7 +51,8 @@ public class TenderDto {
             dto.openDate(),
             dto.closeDate(),
             dto.deliveryAddress(),
-            dto.currencyName()
+            dto.currencyName(),
+            dto.url()
         );
     }
 
@@ -62,7 +64,8 @@ public class TenderDto {
             request.openDate(),
             request.closeDate(),
             request.deliveryAddress(),
-            request.currencyName()
+            request.currencyName(),
+            request.url()
         );
     }
 

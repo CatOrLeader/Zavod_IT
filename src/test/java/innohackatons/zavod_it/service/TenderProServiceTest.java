@@ -3,6 +3,8 @@ package innohackatons.zavod_it.service;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.github.tomakehurst.wiremock.junit5.WireMockExtension;
 import com.google.gson.Gson;
+import innohackatons.zavod_it.db.JpaTenderRepository;
+import innohackatons.zavod_it.db.TenderRepository;
 import innohackatons.zavod_it.dto.TenderDto;
 import innohackatons.zavod_it.service.tenderpro.LocalDateAdapter;
 import innohackatons.zavod_it.service.tenderpro.TenderProService;
@@ -12,6 +14,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.MockBeans;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
@@ -23,6 +27,10 @@ import static com.github.tomakehurst.wiremock.client.WireMock.urlPathEqualTo;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@MockBeans(value = {
+    @MockBean(classes = JpaTenderRepository.class),
+    @MockBean(classes = TenderRepository.class)
+})
 public class TenderProServiceTest {
 
     @RegisterExtension
@@ -30,13 +38,16 @@ public class TenderProServiceTest {
         .options(WireMockConfiguration.wireMockConfig().dynamicPort())
         .build();
 
-    @DynamicPropertySource
-    private static void configureProperties(DynamicPropertyRegistry registry) {
-        registry.add("app.client.tender-pro-url", WIRE_MOCK_SERVER::baseUrl);
-    }
-
     @Autowired
     private TenderProService tenderProService;
+
+    @DynamicPropertySource
+    private static void configureProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.autoconfigure.exclude", () ->
+            "org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration," +
+            " org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration," +
+            " org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration");
+    }
 
     @Test
     public void testFindAllTenders() {

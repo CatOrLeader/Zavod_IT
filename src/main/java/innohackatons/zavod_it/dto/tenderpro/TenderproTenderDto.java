@@ -18,5 +18,6 @@ public record TenderproTenderDto(@NotBlank String id,
                                  String deliveryAddress,
                                  String currencyName,
                                  @NotBlank String companyId,
-                                 @NotBlank String companyName) {
+                                 @NotBlank String companyName,
+                                 @NotBlank String url) {
 }

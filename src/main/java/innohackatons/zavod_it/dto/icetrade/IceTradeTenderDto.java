@@ -10,6 +10,7 @@ public record IceTradeTenderDto(
     @NotNull LocalDate closeDate,
     @NotBlank String title,
     @NotBlank String type,
-    @NotBlank String companyName
+    @NotBlank String companyName,
+    @NotBlank String url
 ) {
 }

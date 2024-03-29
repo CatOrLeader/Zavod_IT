@@ -13,5 +13,6 @@ public record TenderRequest(@NotBlank String id,
                             @NotNull LocalDate openDate,
                             @NotNull LocalDate closeDate,
                             String deliveryAddress,
-                            String currencyName) {
+                            String currencyName,
+                            String url) {
 }

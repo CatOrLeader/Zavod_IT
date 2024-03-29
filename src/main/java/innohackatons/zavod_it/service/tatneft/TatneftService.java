@@ -61,8 +61,9 @@ public class TatneftService implements TenderService {
                     cells.get(3).text(),
                     LocalDate.parse(cells.get(1).text(), formatter),
                     LocalDate.parse(cells.get(2).text(), formatter),
-                    "ULITSA_HREN_MORZHOVAYA",
-                    "RUB"
+                    null,
+                    null,
+                    tatneftUrl
                 ))
                 .collect(Collectors.toList()));
 

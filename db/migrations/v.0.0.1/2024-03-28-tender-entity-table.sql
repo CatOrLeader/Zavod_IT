@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS tender (
     open_date DATE NOT NULL,
     close_date DATE NOT NULL,
     delivery_address VARCHAR(256),
-    currency_name VARCHAR(16)
+    currency_name VARCHAR(16),
+    url TEXT
 );
 -- rollback DROP TABLE tender;

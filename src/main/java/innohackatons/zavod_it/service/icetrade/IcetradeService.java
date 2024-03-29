@@ -1,5 +1,6 @@
 package innohackatons.zavod_it.service.icetrade;
 
+import innohackatons.zavod_it.configuration.ApplicationConfiguration;
 import innohackatons.zavod_it.dto.TenderDto;
 import innohackatons.zavod_it.service.TenderService;
 import java.time.LocalDate;
@@ -20,6 +21,7 @@ import reactor.core.publisher.Mono;
 @Log4j2
 @RequiredArgsConstructor
 public class IcetradeService implements TenderService {
+    private static final String TENDER_URL = "https://icetrade.by" + "/foreign/view/%s";
     private final WebClient iceTradeClient;
 
     @Override
@@ -65,7 +67,9 @@ public class IcetradeService implements TenderService {
             LocalDate offersDueDate = LocalDate.parse(cells.get(5).text(), formatter);
 
             TenderDto tenderDto =
-                new TenderDto(number, subject, "Открытый", LocalDate.of(2000, 1, 1), offersDueDate, region, "RUB");
+                new TenderDto(number, subject, "Открытый", LocalDate.of(2000, 1, 1), offersDueDate, region, "RUB",
+                    String.format(TENDER_URL, number)
+                );
             tenderList.add(tenderDto);
         }
 

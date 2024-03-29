@@ -30,7 +30,8 @@ public class TenderproTenderDeserializer extends JsonDeserializer<TenderproTende
             json.get("delivery_address").asText(),
             json.get("currency_name").asText(),
             json.get("company_id").asText(),
-            json.get("company_name").asText()
+            json.get("company_name").asText(),
+            null
         );
     }
 }

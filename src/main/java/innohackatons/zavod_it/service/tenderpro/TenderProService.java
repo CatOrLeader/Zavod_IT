@@ -4,7 +4,6 @@ import innohackatons.zavod_it.dto.TenderDto;
 import innohackatons.zavod_it.dto.tenderpro.Response;
 import innohackatons.zavod_it.service.TenderService;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -15,6 +14,8 @@ import reactor.core.publisher.Mono;
 @Log4j2
 @RequiredArgsConstructor
 public class TenderProService implements TenderService {
+    private static final String TENDER_URL = "https://www.tender.pro/api" + "/tender/%s/view_public";
+
     private final WebClient tenderproClient;
 
     @Override
@@ -50,7 +51,12 @@ public class TenderProService implements TenderService {
                     return Mono.empty();
                 }
                 return Mono.justOrEmpty(entity.getBody().result().data().stream()
-                    .map(TenderDto::new).collect(Collectors.toList()));
+                    .map(tenderproTenderDto -> {
+                        var tenderDto = new TenderDto(tenderproTenderDto);
+                        tenderDto.setUrl(String.format(TENDER_URL, tenderDto.getId()));
+                        return tenderDto;
+                    })
+                    .toList());
             });
     }
 

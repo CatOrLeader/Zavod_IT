@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TenderRepositoryTest extends IntegrationTest {
     private static final TenderDto TENDER_SINGLE = new TenderDto(
         "1", "tender", "type", LocalDate.of(2022, 2, 2), LocalDate.of(2022, 2, 2),
-        "severstal", "rub"
+        "severstal", "rub", "https://www.tender.pro/api/1/view_public"
     );
 
     @Autowired
@@ -61,7 +61,7 @@ public class TenderRepositoryTest extends IntegrationTest {
     void givenNewTender_whenUpdatingOldTender_thenCorrectlyUpdated() {
         TenderDto newTender = new TenderDto(
             "1", "new tender", "type", LocalDate.of(2022, 2, 2), LocalDate.of(2022, 2, 2),
-            "severstal", "rub"
+            "severstal", "rub", "https://www.tender.pro/api/1/view_public"
         );
 
         boolean isUpdated = repository.update(newTender);
