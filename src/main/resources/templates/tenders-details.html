@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,6 +48,12 @@
                         <div class="info">
                             <span>Название валюты:</span>
                             <span th:text="${tender.currencyName ?: 'Нет информации'}"></span>
+                        </div>
+                        <div class="url">
+                            <span>Ссылка:</span>
+                            <a th:if="${tender.url}" th:href="${tender.url}" target="_blank" rel="noopener noreferrer"
+                               th:text="${tender.url}">Link</a>
+                            <span th:unless="${tender.url}">Нет информации</span>
                         </div>
                     </div>
                 </div>

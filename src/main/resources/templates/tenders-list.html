@@ -23,7 +23,7 @@
                 <div th:each="tender : ${tenders}" class="col-lg-6 mb-2">
                     <div class="position-relative mb-3">
                         <a th:text="${tender.title}" class="h3 fw-bolder text-decoration-none link-dark stretched-link"
-                           th:href="@{/tenders/{tender}(tenderId=${tender.id})}"></a>
+                           th:href="@{/tenders/tender.id}"></a>
                         <!-- Add start date, end date, and type below the title -->
                         <p class="fw-normal text-muted mb-1">Дата открытия: <span th:text="${tender.openDate}"></span></p>
                         <p class="fw-normal text-muted mb-1">Дата закрытия: <span th:text="${tender.closeDate}"></span></p>
