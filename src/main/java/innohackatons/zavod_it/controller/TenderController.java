@@ -19,7 +19,7 @@ public class TenderController {
 
     @GetMapping(value = {"/tenders", "/"})
     public String listTenders(Model model) {
-        List<TenderDto> tenders = tenderProService.findAllTenders().get();
+        List<TenderDto> tenders = tenderProService.findAllTenders().block();
         repository.add(tenders);
         model.addAttribute("tenders", tenders);
         return "tenders-list";

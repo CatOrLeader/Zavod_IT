@@ -1,4 +1,4 @@
-package innohackatons.zavod_it;
+package innohackatons.zavod_it.service;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -15,29 +15,22 @@ public class IceTradeClientTest {
     @Test
     void testConnectionGet() {
         try {
-            // Отключение проверки сертификата
             trustAllCertificates();
 
-            // URL для запроса
             URL url = new URL(
                 "https://icetrade.by/search/foreign_uno?search_text=&auc_num=&company_title=&countries%5B%5D=RUS&industries=&period=&created_from=&created_to=&request_end_from=&request_end_to=&sort=num:desc&sbm=1&onPage=20");
 
-            // Открытие соединения
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
 
-            // Установка метода запроса
             connection.setRequestMethod("GET");
 
-            // Получение ответа
             int responseCode = connection.getResponseCode();
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                // Создание потока для чтения данных из соединения
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String inputLine;
                 StringBuffer response = new StringBuffer();
 
-                // Чтение ответа строка за строкой
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
                 }

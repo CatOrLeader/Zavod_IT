@@ -22,6 +22,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 @Service
 @Log4j2
@@ -32,7 +33,7 @@ public class TatneftService implements TenderService {
     private String tatneftUrl;
 
     @Override
-    public Optional<List<TenderDto>> findAllTenders() {
+    public Mono<List<TenderDto>> findAllTenders() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
         WebDriver driver = new ChromeDriver(options);
@@ -72,12 +73,11 @@ public class TatneftService implements TenderService {
 
             driver.quit();
 
-            return listTenders;
+            return Mono.justOrEmpty(listTenders.orElse(null));
         } catch (InterruptedException e) {
             System.out.println(e.getMessage());
-            return Optional.empty();
+            return Mono.empty();
         }
-
     }
 
     @Override
@@ -89,4 +89,5 @@ public class TatneftService implements TenderService {
     public Optional<TenderDto> findTenderById(String id) {
         return Optional.empty();
     }
+
 }

@@ -19,7 +19,7 @@ public class TenderProService implements TenderService {
     private final WebClient tenderproClient;
 
     @Override
-    public Optional<List<TenderDto>> findAllTenders() {
+    public Mono<List<TenderDto>> findAllTenders() {
         return tenderproClient
             .get()
             .uri(uriBuilder -> uriBuilder
@@ -46,15 +46,13 @@ public class TenderProService implements TenderService {
                 }
 
                 var request = body.result();
-                if (request == null) {
-                    log.warn("'request' field of the request is null");
+                if (request == null || request.data() == null) {
+                    log.warn("No tender data in the response");
                     return Mono.empty();
                 }
-
                 return Mono.justOrEmpty(entity.getBody().result().data().stream()
                     .map(TenderDto::new).collect(Collectors.toList()));
-            })
-            .blockOptional();
+            });
     }
 
     @Override

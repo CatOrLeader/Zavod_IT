@@ -1,4 +1,4 @@
-package innohackatons.zavod_it;
+package innohackatons.zavod_it.service;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.jsoup.Jsoup;
@@ -10,12 +10,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-
+// БЕЗ VPN
 @SpringBootTest
-class ZavodItApplicationTests {
-
+class TatneftClientSimpleTest {
+//
     @Value("${app.client.tender-tatneft}")
     private String tatneftUrl;
 
@@ -26,8 +27,9 @@ class ZavodItApplicationTests {
 //            "C:\\Users\\Vladi\\Downloads\\chromedriver-win64\\chromedriver.exe"
 //        );
         WebDriverManager.chromedriver().setup();
-
-        WebDriver driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        WebDriver driver = new ChromeDriver(options);
 
         driver.get(tatneftUrl);
 
